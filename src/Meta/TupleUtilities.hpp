@@ -3,6 +3,7 @@
 
 #include <tuple>
 #include "Sequence.hpp"
+#include "FlowControl.hpp"
 
 /*
  * Get
@@ -40,14 +41,77 @@
  *
  */
 
+
+template <typename T>
+struct TypeName {
+    static const char * execute() { return "Type not declared!"; }
+};
+#define DECLARE_TYPE_NAME(Type) template <> struct TypeName<Type> { static const char * execute() { return #Type; } };
+
+DECLARE_TYPE_NAME(void)
+DECLARE_TYPE_NAME(int)
+DECLARE_TYPE_NAME(bool)
+DECLARE_TYPE_NAME(float)
+DECLARE_TYPE_NAME(double)
+DECLARE_TYPE_NAME(short)
+DECLARE_TYPE_NAME(long)
+DECLARE_TYPE_NAME(char)
+DECLARE_TYPE_NAME(std::tuple<>)
+
 namespace meta
 {
 
-
-template<typename Tuple>
-struct PrintTupleTypes {
+////////
+template<typename First, typename... Rest>
+struct PrintTupleTypes_ {
     static void execute() {
+        std::cout << TypeName<First>::execute() << ", ";
+        PrintTupleTypes_<Rest...>::execute();
+    }
+};
+template<typename First>
+struct PrintTupleTypes_<First> {
+     static void execute() {
+         std::cout << TypeName<First>::execute();
+     }
+ };
 
+// If the tuple contain a tuple and then other types/tuples
+template<typename TypeFirst1, typename... TypeFirst, typename Rest1, typename... Rest>
+struct PrintTupleTypes_<std::tuple<TypeFirst1, TypeFirst...>, Rest1, Rest...> {
+    static void execute() {
+        std::cout << "<";
+        PrintTupleTypes_<TypeFirst1, TypeFirst...>::execute();
+        std::cout << ">, ";
+        PrintTupleTypes_<Rest1, Rest...>::execute();
+    }
+};
+// If the tuple contain a tuple
+template<typename Types1, typename... Types >
+struct PrintTupleTypes_<std::tuple<Types1, Types...>> {
+     static void execute() {
+         std::cout << "<";
+         PrintTupleTypes_<Types1, Types...>::execute();
+         std::cout << ">";
+     }
+ };
+template<typename... Types>
+struct PrintTupleTypes;
+
+template<typename Types1, typename... Types>
+struct PrintTupleTypes<std::tuple<Types1, Types...>> {
+    static void execute() {
+        std::cout << "<";
+        PrintTupleTypes_<Types1, Types...>::execute();
+        std::cout << ">\n";
+    }
+};
+// Empty tuple
+template<>
+struct PrintTupleTypes<std::tuple<>> {
+    static void execute() {
+        std::cout << "<";
+        std::cout << ">\n";
     }
 };
 
@@ -62,15 +126,18 @@ struct merge_tuples{
 template<typename... Types>
 struct merge_tuples;
 
+// If more than 2 tuples
 template<typename...Types1,typename...Types2,typename...Tuples>
-struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>, Tuples...> {
+struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>, Tuples...>
+{
   typedef typename merge_tuples<std::tuple<Types1...,Types2...>, Tuples...>::type type;
 };
 
-
+// If 2 tuples
 template<typename...Types1,typename...Types2>
-struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>> {
-  typedef std::tuple<Types1...,Types2...> type;
+struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>>
+{
+  typedef std::tuple<Types1..., Types2...> type;
 };
 
 
@@ -84,36 +151,50 @@ struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>> {
         typedef typename std::tuple_element<Index, Tuple>::type type;
     };
 
-    /*!
-     *
-     */
-    template<typename Tuple, typename S>
-    struct Tuple_add_;
 
-    template<typename Tuple, size_t... sequence>
-    struct Tuple_add_<Tuple, Sequence<sequence...>> {
-        typedef std::tuple<std::tuple_element<sequence, Tuple>...> type;
-    };
-
-    template<typename Tuple, int Index, typename Type>
-    struct Tuple_add {
-        typedef typename Range<0, Index-1>::type preSequence;
-        typedef typename Range<Index, std::tuple_size<Tuple>::value>::type postSequence;
-        typedef typename Tuple_add_<Tuple, preSequence>::type preTuple;
-        typedef typename Tuple_add_<Tuple, postSequence>::type postTuple;
-
-        typedef typename merge_tuples<preTuple, std::tuple<Type>, postTuple>::type type;
-    };
-    template<typename Tuple,typename Type>
-    struct Tuple_add<Tuple, 0, Type> {
-        typedef typename merge_tuples<std::tuple<Type>, Tuple>::type type;
-    };
     /*!
      *
      */
     template<typename Tuple, typename Type>
     struct Tuple_addBack {
         typedef typename merge_tuples<Tuple,std::tuple<Type> >::type type;
+    };
+
+    /*!
+     *
+     */
+    template<typename Tuple, typename S>
+    struct Tuple_add__;
+
+    template<typename Tuple, size_t... sequence>
+    struct Tuple_add__<Tuple, Sequence<sequence...>> {
+        typedef std::tuple<typename std::tuple_element<sequence, Tuple>::type...> type;
+    };
+
+    template<typename Tuple, int Index, typename Type>
+    struct Tuple_add_ {
+        typedef typename Range<0, Index-1>::type preSequence;
+        typedef typename Range<Index, std::tuple_size<Tuple>::value-1>::type postSequence;
+        typedef typename Tuple_add__<Tuple, postSequence>::type preTuple;
+        typedef typename Tuple_add__<Tuple, postSequence>::type postTuple;
+
+        typedef typename merge_tuples<preTuple, std::tuple<Type>, postTuple>::type type;
+    };
+
+    // Base
+    template<typename Tuple, int Index, typename Type>
+    struct Tuple_add;
+    // Add at the end
+    template<typename... types, int Index, typename Type>
+    struct Tuple_add<std::tuple<types...>, Index, Type> {
+        static_assert(Index <= int(sizeof...(types)), "Tuple_add<Tuple, index, Type> got a index that was out of bounds (to large)");
+        static_assert(Index >= 0,                     "Tuple_add<Tuple, index, Type> got a index that was out of bounds (negative)");
+        typedef typename IF<Condition<Index == sizeof...(types)>, Tuple_addBack<std::tuple<types...>, Type>, Tuple_add_<std::tuple<types...>, Index, Type>>::type type;
+    };
+    // Add at the beginning
+    template<typename... types, typename Type>
+    struct Tuple_add<std::tuple<types...>, 0, Type> {
+        typedef typename merge_tuples<std::tuple<Type>, std::tuple<types...>>::type type;
     };
 
 

@@ -42,6 +42,7 @@ void printIndexRange(meta::Sequence<sequence...>) {
     printIndexRange_<sequence...>();
 }
 
+
 int main()
 {
     meta::Condition<true>::value();
@@ -57,7 +58,7 @@ int main()
 
     std::cerr << "Tuple test";
     typedef meta::Tuple<int, double, int> tuple1;
-    typedef meta::Tuple<float, int> tuple2;
+    typedef meta::Tuple<> tuple2;
     typedef meta::Tuple<> emptyTuple;
     std::cerr << "TupleLength: "+std::to_string(tuple1::length);
     std::cerr << "TupleLength: "+std::to_string(emptyTuple::length);
@@ -75,8 +76,10 @@ int main()
     std::cerr << "\n";
 
     std::cerr << "sizeBefore: "+std::to_string(meta::Tuple_length<tuple2::type>::value);
-    typedef meta::Tuple_add<tuple2::type, 1, float> newTuple2;
+    meta::PrintTupleTypes<tuple2::type>::execute();
+    typedef meta::Tuple_add<tuple2::type, 0, float> newTuple2;
     std::cerr << "sizeAfter: "+std::to_string(meta::Tuple_length<newTuple2::type>::value);
+    meta::PrintTupleTypes<newTuple2::type>::execute();
 
     return 0;
 }
