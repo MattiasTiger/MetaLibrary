@@ -50,7 +50,6 @@ endif()
 
 set(CMAKE_C_IMPLICIT_LINK_LIBRARIES "mingw32;moldname;mingwex;msvcrt;pthread;advapi32;shell32;user32;kernel32;iconv;mingw32;moldname;mingwex;msvcrt")
 set(CMAKE_C_IMPLICIT_LINK_DIRECTORIES "c:/Qt/Qt5.1.1/Tools/mingw48_32/lib/gcc/i686-w64-mingw32/4.8.0;c:/Qt/Qt5.1.1/Tools/mingw48_32/lib/gcc;c:/Qt/Qt5.1.1/Tools/mingw48_32/i686-w64-mingw32/lib;c:/Qt/Qt5.1.1/Tools/mingw48_32/lib")
-set(CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")
 
 
 

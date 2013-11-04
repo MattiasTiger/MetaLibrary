@@ -25,22 +25,22 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\CMake 2.8\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\CMake 2.8\bin\cmake.exe" -E remove -f
+RM = "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = "C:\Program Files\CMake 2.8\bin\cmake-gui.exe"
+CMAKE_EDIT_COMMAND = "C:\Program Files (x86)\CMake 2.8\bin\cmake-gui.exe"
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Student\Documents\GitHub\MetaLibrary\src
+CMAKE_SOURCE_DIR = C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Student\Documents\GitHub\MetaLibrary\src-build
+CMAKE_BINARY_DIR = C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/MetaLibrary.dir/depend.make
@@ -53,18 +53,18 @@ include CMakeFiles/MetaLibrary.dir/flags.make
 
 CMakeFiles/MetaLibrary.dir/test.cpp.obj: CMakeFiles/MetaLibrary.dir/flags.make
 CMakeFiles/MetaLibrary.dir/test.cpp.obj: CMakeFiles/MetaLibrary.dir/includes_CXX.rsp
-CMakeFiles/MetaLibrary.dir/test.cpp.obj: C:/Users/Student/Documents/GitHub/MetaLibrary/src/test.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Student\Documents\GitHub\MetaLibrary\src-build\CMakeFiles $(CMAKE_PROGRESS_1)
+CMakeFiles/MetaLibrary.dir/test.cpp.obj: C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/test.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/MetaLibrary.dir/test.cpp.obj"
-	C:\Qt\Qt5.1.1\Tools\mingw48_32\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\MetaLibrary.dir\test.cpp.obj -c C:\Users\Student\Documents\GitHub\MetaLibrary\src\test.cpp
+	C:\Qt\Qt5.1.1\Tools\mingw48_32\bin\g++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles\MetaLibrary.dir\test.cpp.obj -c C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src\test.cpp
 
 CMakeFiles/MetaLibrary.dir/test.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MetaLibrary.dir/test.cpp.i"
-	C:\Qt\Qt5.1.1\Tools\mingw48_32\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\Student\Documents\GitHub\MetaLibrary\src\test.cpp > CMakeFiles\MetaLibrary.dir\test.cpp.i
+	C:\Qt\Qt5.1.1\Tools\mingw48_32\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src\test.cpp > CMakeFiles\MetaLibrary.dir\test.cpp.i
 
 CMakeFiles/MetaLibrary.dir/test.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MetaLibrary.dir/test.cpp.s"
-	C:\Qt\Qt5.1.1\Tools\mingw48_32\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\Student\Documents\GitHub\MetaLibrary\src\test.cpp -o CMakeFiles\MetaLibrary.dir\test.cpp.s
+	C:\Qt\Qt5.1.1\Tools\mingw48_32\bin\g++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src\test.cpp -o CMakeFiles\MetaLibrary.dir\test.cpp.s
 
 CMakeFiles/MetaLibrary.dir/test.cpp.obj.requires:
 .PHONY : CMakeFiles/MetaLibrary.dir/test.cpp.obj.requires
@@ -101,6 +101,6 @@ CMakeFiles/MetaLibrary.dir/clean:
 .PHONY : CMakeFiles/MetaLibrary.dir/clean
 
 CMakeFiles/MetaLibrary.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Student\Documents\GitHub\MetaLibrary\src C:\Users\Student\Documents\GitHub\MetaLibrary\src C:\Users\Student\Documents\GitHub\MetaLibrary\src-build C:\Users\Student\Documents\GitHub\MetaLibrary\src-build C:\Users\Student\Documents\GitHub\MetaLibrary\src-build\CMakeFiles\MetaLibrary.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build\CMakeFiles\MetaLibrary.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/MetaLibrary.dir/depend
 

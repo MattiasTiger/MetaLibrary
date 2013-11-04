@@ -37,22 +37,22 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\CMake 2.8\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\CMake 2.8\bin\cmake.exe" -E remove -f
+RM = "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = "C:\Program Files\CMake 2.8\bin\cmake-gui.exe"
+CMAKE_EDIT_COMMAND = "C:\Program Files (x86)\CMake 2.8\bin\cmake-gui.exe"
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Student\Documents\GitHub\MetaLibrary\src
+CMAKE_SOURCE_DIR = C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Student\Documents\GitHub\MetaLibrary\src-build
+CMAKE_BINARY_DIR = C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build
 
 #=============================================================================
 # Target rules for target CMakeFiles/MetaLibrary.dir
@@ -61,7 +61,7 @@ CMAKE_BINARY_DIR = C:\Users\Student\Documents\GitHub\MetaLibrary\src-build
 CMakeFiles/MetaLibrary.dir/all:
 	$(MAKE) -f CMakeFiles\MetaLibrary.dir\build.make CMakeFiles/MetaLibrary.dir/depend
 	$(MAKE) -f CMakeFiles\MetaLibrary.dir\build.make CMakeFiles/MetaLibrary.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\Student\Documents\GitHub\MetaLibrary\src-build\CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build\CMakeFiles  1
 	@echo Built target MetaLibrary
 .PHONY : CMakeFiles/MetaLibrary.dir/all
 
@@ -71,9 +71,9 @@ all: CMakeFiles/MetaLibrary.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/MetaLibrary.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Student\Documents\GitHub\MetaLibrary\src-build\CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build\CMakeFiles 1
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/MetaLibrary.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Student\Documents\GitHub\MetaLibrary\src-build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\TiXiR\Documents\GitHub\MetaLibrary\src-build\CMakeFiles 0
 .PHONY : CMakeFiles/MetaLibrary.dir/rule
 
 # Convenience name for target.

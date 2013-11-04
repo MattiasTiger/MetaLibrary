@@ -17,6 +17,10 @@ namespace meta
     struct True;
     struct False;
 
+    template<typename T>
+    struct Type {
+        typedef T type;
+    };
 
 
     // IMPROVE THIS! (using indices? using loops?)
@@ -39,6 +43,7 @@ namespace meta
         //typedef typename MetaCall_<0, std::tuple_size<ArgTuple>::value, Template, ArgTuple>::type type;
     };
 
+
     /*!
      * \brief   No Operator
      */
@@ -49,20 +54,6 @@ namespace meta
     /*!
      * \brief   IF<Condition,Then,Else> -> Then or Else depending on Condition
      */
-    /*
-    template<typename Condition, typename Then, typename Else>
-    struct IF_ {};
-
-    template<typename Then, typename Else>
-    struct IF_<True, Then, Else> : public Then {};
-
-    template<typename Then, typename Else>
-    struct IF_<False, Then, Else> : public Else {};
-
-    template<typename Condition, typename Then, typename Else = NOP>
-    struct IF : public IF_<typename Condition::metaValue, Then, Else> {};
-    */
-
     template<typename Condition, typename Then, typename Else>
     struct IF_ {};
 
@@ -76,8 +67,9 @@ namespace meta
         typedef typename Else::type type;
     };
 
-    template<typename Condition, typename Then, typename Else = NOP>
+    template<typename Condition, typename Then, typename Else = Type<NOP> >
     struct IF : public IF_<typename Condition::type, Then, Else> {};
+
 
     /*!
      * \brief   LOOP<Tuple, >

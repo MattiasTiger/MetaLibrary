@@ -6,31 +6,39 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
 FlowControl.hpp
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 tuple
 -
 
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
+FlowControl.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
 tuple
 -
+Sequence.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
 
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
+Meta/Sequence.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
 Meta/FlowControl.hpp
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 Meta/Condition.hpp
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
 Meta/TupleUtilities.hpp
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
 
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/test.cpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/test.cpp
 iostream
 -
 string
 -
 MetaLibrary.hpp
-C:/Users/Student/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
 

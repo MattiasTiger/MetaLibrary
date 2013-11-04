@@ -2,6 +2,7 @@
 #define TUPLE_UTILITIES
 
 #include <tuple>
+#include "Sequence.hpp"
 
 /*
  * Get
@@ -42,19 +43,144 @@
 namespace meta
 {
 
+////////
+
+
+template<typename... Types>
+struct merge_tuples{
+  typedef std::tuple<Types...> type;
+};
+
+template<typename...Types1,typename...Types2>
+struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>> {
+  typedef std::tuple<Types1...,Types2...> type;
+};
+
+
+////////
+
+    /*!
+     *
+     */
     template<typename Tuple, int Index>
     struct Tuple_getType {
         typedef typename std::tuple_element<Index, Tuple>::type type;
     };
 
+    /*!
+     *
+     */
+    template<typename Tuple, typename S>
+    struct Tuple_add_;
+
+    template<typename Tuple, size_t... sequence>
+    struct Tuple_add_<Tuple, Sequence<sequence...>> {
+        typedef std::tuple<std::tuple_element<sequence, Tuple>...> type;
+    };
+
+    template<typename Tuple, int Index, typename Type>
+    struct Tuple_add {
+        typedef typename Range<0, Index-1>::type preSequence;
+        typedef typename Range<Index, std::tuple_size<Tuple>::value>::type postSequence;
+        typedef typename Tuple_add_<Tuple, preSequence>::type preTuple;
+        typedef typename Tuple_add_<Tuple, postSequence>::type postTuple;
+
+        typedef typename merge_tuples<preTuple, std::tuple<Type>, postTuple>::type type;
+    };
+    template<typename Tuple,typename Type>
+    struct Tuple_add<Tuple, 0, Type> {
+        typedef typename merge_tuples<std::tuple<Type>, Tuple>::type type;
+    };
+    /*!
+     *
+     */
+    template<typename Tuple, typename Type>
+    struct Tuple_addBack {
+        typedef typename merge_tuples<Tuple,std::tuple<Type> >::type type;
+    };
+
+
+    /*!
+     *
+     */
+    template<typename Tuple, typename Type>
+    struct Tuple_removeType {
+        typedef int type;
+    };
+
+
+    /*!
+     *
+     */
+    template<typename Tuple, typename Type>
+    struct Tuple_removeAllType {
+        typedef int type;
+    };
+
+
+    /*!
+     *
+     */
+    template<typename Tuple, int Index>
+    struct Tuple_remove {
+        typedef int type;
+    };
+
+
+    /*!
+     *
+     */
+    template<typename Tuple, typename Type>
+    struct Tuple_containType {
+        typedef int value;
+    };
+
+    /*!
+     *
+     */
+    template<typename Tuple>
+    struct Tuple_isEmpty {
+        static const bool value = std::tuple_size<Tuple>::value == 0;
+    };
+
+
+    /*!
+     *
+     */
+    template<typename Tuple>
+    struct Tuple_length {
+        static const unsigned int value = std::tuple_size<Tuple>::value;
+    };
+
+
+
+    /*!
+     * \brief   Tuple contains the entire Tuple_... interface (for easy access)
+     */
     template<typename... Variadic>
     struct Tuple {
         typedef std::tuple<Variadic...> type;
 
-        static const int length = std::tuple_size<type>::value;
-
+        // Get
         template<int index>
         struct getType : public Tuple_getType<type, index> {};
+
+        // Add
+        template<int index, typename Type>
+        struct add : public Tuple_add<type, index, Type> {};
+
+        // Remove
+
+        // Boolean
+        static const bool isEmpty = Tuple_isEmpty<type>::value;
+
+        // Informatic
+        static const unsigned int length = Tuple_length<type>::value;
+
+        // Manage tuples
+
+        // Set operations
+
     };
 
 }

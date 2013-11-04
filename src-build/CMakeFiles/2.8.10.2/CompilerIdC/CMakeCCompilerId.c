@@ -109,7 +109,7 @@
 # define COMPILER_VERSION_MINOR DEC(_RELEASE_MINOR)
 
 #elif defined(__TI_COMPILER_VERSION__)
-# define COMPILER_ID "TI"
+# define COMPILER_ID "TI_DSP"
   /* __TI_COMPILER_VERSION__ = VVVRRRPPP */
 # define COMPILER_VERSION_MAJOR DEC(__TI_COMPILER_VERSION__/1000000)
 # define COMPILER_VERSION_MINOR DEC(__TI_COMPILER_VERSION__/1000   % 1000)
@@ -245,8 +245,11 @@ char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
 #elif defined(__hpux) || defined(__hpux__)
 # define PLATFORM_ID "HP-UX"
 
-#elif defined(__HAIKU__)
+#elif defined(__HAIKU) || defined(__HAIKU__) || defined(_HAIKU)
 # define PLATFORM_ID "Haiku"
+/* Haiku also defines __BEOS__ so we must
+   put it prior to the check for __BEOS__
+*/
 
 #elif defined(__BeOS) || defined(__BEOS__) || defined(_BEOS)
 # define PLATFORM_ID "BeOS"
