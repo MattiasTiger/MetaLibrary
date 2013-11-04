@@ -43,13 +43,30 @@
 namespace meta
 {
 
+
+template<typename Tuple>
+struct PrintTupleTypes {
+    static void execute() {
+
+    }
+};
+
 ////////
 
-
+/*
 template<typename... Types>
 struct merge_tuples{
   typedef std::tuple<Types...> type;
 };
+*/
+template<typename... Types>
+struct merge_tuples;
+
+template<typename...Types1,typename...Types2,typename...Tuples>
+struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>, Tuples...> {
+  typedef typename merge_tuples<std::tuple<Types1...,Types2...>, Tuples...>::type type;
+};
+
 
 template<typename...Types1,typename...Types2>
 struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>> {
