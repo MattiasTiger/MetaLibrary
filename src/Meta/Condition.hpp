@@ -1,3 +1,6 @@
+/*
+ * Author: Mattias Tiger 2013
+ */
 #ifndef CONDITION_HPP
 #define CONDITION_HPP
 

@@ -6,7 +6,7 @@
 template<int N>
 struct print {
     static void execute() {
-        std::cerr << N;
+        std::cout << N;
     }
 };
 
@@ -24,7 +24,7 @@ template<int N>
 struct FailWithCode2 {
     static_assert(N != 0, "Failed 2");
     static void execute() {
-        std::cerr << "Fail2";
+        std::cout << "Fail2";
     }
 };
 
@@ -48,38 +48,38 @@ int main()
     meta::Condition<true>::value();
     meta::Condition<false>::value();
 
-    std::cerr << "\n";
+    std::cout << "\n";
 
     meta::IF<meta::Condition<true>, printType<1>  >::type::execute();
     meta::IF<meta::Condition<false>, printType<1> >::type::execute();
 
-    std::cerr << "\n";
+    std::cout << "\n";
 
 
-    std::cerr << "Tuple test";
+    std::cout << "Tuple test\n";
     typedef meta::Tuple<int, double, int> tuple1;
     typedef meta::Tuple<> tuple2;
     typedef meta::Tuple<> emptyTuple;
-    std::cerr << "TupleLength: "+std::to_string(tuple1::length);
-    std::cerr << "TupleLength: "+std::to_string(emptyTuple::length);
+    std::cout << "TupleLength: "+std::to_string(tuple1::length) << "\n";
+    std::cout << "TupleLength: "+std::to_string(emptyTuple::length) << "\n";
 
-    std::cerr << "Empty?: "+std::to_string(tuple1::isEmpty);
-    std::cerr << "Empty?: "+std::to_string(emptyTuple::isEmpty);
+    std::cout << "Empty?: "+std::to_string(tuple1::isEmpty) << "\n";
+    std::cout << "Empty?: "+std::to_string(emptyTuple::isEmpty) << "\n";
 
-    std::cerr << "\nRange:\n";
+    std::cout << "\nRange:\n";
     typedef typename meta::Range<0,10>::type indexRange1;
     printIndexRange(indexRange1{});
-    std::cerr << "IndexRange:\n";
+    std::cout << "IndexRange:\n";
     typedef typename meta::IndexRange<10>::type indexRange2;
     printIndexRange(indexRange2{});
 
-    std::cerr << "\n";
+    std::cout << "\n";
 
-    std::cerr << "sizeBefore: "+std::to_string(meta::Tuple_length<tuple2::type>::value);
-    meta::PrintTupleTypes<tuple2::type>::execute();
+    std::cout << "sizeBefore: "+std::to_string(meta::Tuple_length<tuple2::type>::value) << "\n";
+    std::cout << meta::PrintTupleTypes<tuple2::type>::stream << "\n";
     typedef meta::Tuple_add<tuple2::type, 0, float> newTuple2;
-    std::cerr << "sizeAfter: "+std::to_string(meta::Tuple_length<newTuple2::type>::value);
-    meta::PrintTupleTypes<newTuple2::type>::execute();
+    std::cout << "sizeAfter: "+std::to_string(meta::Tuple_length<newTuple2::type>::value) << "\n";
+    std::cout << meta::PrintTupleTypes<newTuple2::type>::stream << "\n";
 
     return 0;
 }

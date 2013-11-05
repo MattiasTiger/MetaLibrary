@@ -19,12 +19,20 @@ FlowControl.hpp
 C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 
 C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
+ostream
+-
 tuple
 -
 Sequence.hpp
 C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
 FlowControl.hpp
 C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+Type.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
+
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
+
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Utilities.hpp
 
 C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
 Meta/Sequence.hpp
@@ -35,6 +43,10 @@ Meta/Condition.hpp
 C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
 Meta/TupleUtilities.hpp
 C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
+Meta/Type.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
+Meta/Utilities.hpp
+C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Utilities.hpp
 
 C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/test.cpp
 iostream

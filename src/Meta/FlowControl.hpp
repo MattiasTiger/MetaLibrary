@@ -1,3 +1,6 @@
+/*
+ * Author: Mattias Tiger 2013
+ */
 #ifndef FLOW_CONTROL
 #define FLOW_CONTROL
 
@@ -23,7 +26,7 @@ namespace meta
     };
 
 
-    // IMPROVE THIS! (using indices? using loops?)
+    // IMPROVE THIS! (using indices? using loops?: Using tuple<types...> specialization)
     /*!
      * \brief       MetaFunction takes another template and arguments as a tuple that are applied on the template.
      *
@@ -49,6 +52,7 @@ namespace meta
      */
     struct NOP {
         static void execute() { std::cout << "NOPE"; }
+        typedef NOP type;
     };
 
     /*!

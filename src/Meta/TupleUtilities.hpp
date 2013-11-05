@@ -1,9 +1,14 @@
+/*
+ * Author: Mattias Tiger 2013
+ */
 #ifndef TUPLE_UTILITIES
 #define TUPLE_UTILITIES
 
+#include <ostream>
 #include <tuple>
 #include "Sequence.hpp"
 #include "FlowControl.hpp"
+#include "Type.hpp"
 
 /*
  * Get
@@ -30,7 +35,7 @@
  *
  * Manage tuples
  *  Tuple_unique<Tuple>::type               := A copy of Tuple in which no type occures more than once (the first occurance is saved)
- *  Tuple_append<Tuple1,Tuple2>::type       := A tuple consisting of the types of first T1 then T2
+ *  Tuple_merge<Tuple1,Tuple2,...>::type    := A tuple consisting of the types of first Tuple1, then Tuple2, then ....
  *  Tuple_subset<Tuple, Indices>::type      := A tuple consisting of the types indexed in the Indices list (all within range)
  *
  * Set operations
@@ -42,100 +47,89 @@
  */
 
 
-template <typename T>
-struct TypeName {
-    static const char * execute() { return "Type not declared!"; }
-};
-#define DECLARE_TYPE_NAME(Type) template <> struct TypeName<Type> { static const char * execute() { return #Type; } };
-
-DECLARE_TYPE_NAME(void)
-DECLARE_TYPE_NAME(int)
-DECLARE_TYPE_NAME(bool)
-DECLARE_TYPE_NAME(float)
-DECLARE_TYPE_NAME(double)
-DECLARE_TYPE_NAME(short)
-DECLARE_TYPE_NAME(long)
-DECLARE_TYPE_NAME(char)
-DECLARE_TYPE_NAME(std::tuple<>)
-
 namespace meta
 {
 
 ////////
+///
+
+/*!
+ *  \brief  PrintTupleTypes<Tuple>::stream is an ostream containing the names of the types in Tuple and can for example be sent to cout.
+ */
 template<typename First, typename... Rest>
 struct PrintTupleTypes_ {
-    static void execute() {
-        std::cout << TypeName<First>::execute() << ", ";
-        PrintTupleTypes_<Rest...>::execute();
+    inline static std::ostream &stream(std::ostream &os) {
+        os << TypeName<First>::value;
+        os << PrintTupleTypes_<Rest...>::stream;
+        return os;
     }
 };
 template<typename First>
 struct PrintTupleTypes_<First> {
-     static void execute() {
-         std::cout << TypeName<First>::execute();
+     inline static std::ostream &stream(std::ostream &os) {
+         os << TypeName<First>::value;
+         return os;
      }
  };
-
 // If the tuple contain a tuple and then other types/tuples
 template<typename TypeFirst1, typename... TypeFirst, typename Rest1, typename... Rest>
 struct PrintTupleTypes_<std::tuple<TypeFirst1, TypeFirst...>, Rest1, Rest...> {
-    static void execute() {
-        std::cout << "<";
-        PrintTupleTypes_<TypeFirst1, TypeFirst...>::execute();
-        std::cout << ">, ";
-        PrintTupleTypes_<Rest1, Rest...>::execute();
+    inline static std::ostream &stream(std::ostream &os) {
+        os << "<";
+        os << PrintTupleTypes_<TypeFirst1, TypeFirst...>::stream;
+        os << ">, ";
+        os << PrintTupleTypes_<Rest1, Rest...>::stream;
+        return os;
     }
 };
 // If the tuple contain a tuple
 template<typename Types1, typename... Types >
 struct PrintTupleTypes_<std::tuple<Types1, Types...>> {
-     static void execute() {
-         std::cout << "<";
-         PrintTupleTypes_<Types1, Types...>::execute();
-         std::cout << ">";
+     inline static std::ostream &stream(std::ostream &os) {
+         os << "<";
+         os << PrintTupleTypes_<Types1, Types...>::stream;
+         os << ">";
+         return os;
      }
  };
 template<typename... Types>
 struct PrintTupleTypes;
-
 template<typename Types1, typename... Types>
 struct PrintTupleTypes<std::tuple<Types1, Types...>> {
-    static void execute() {
-        std::cout << "<";
-        PrintTupleTypes_<Types1, Types...>::execute();
-        std::cout << ">\n";
+    inline static std::ostream &stream(std::ostream &os) {
+        os << "<";
+        os << PrintTupleTypes_<Types1, Types...>::stream;
+        os << ">";
+        return os;
     }
 };
 // Empty tuple
 template<>
 struct PrintTupleTypes<std::tuple<>> {
-    static void execute() {
-        std::cout << "<";
-        std::cout << ">\n";
+    inline static std::ostream &stream(std::ostream &os) {
+        os << "<>";
+        return os;
     }
 };
 
 ////////
 
-/*
+/*!
+ *  \brief  Merges two or several tuples, the new merged tuple is found in Tuple_merge<Tuples...>::type
+ */
 template<typename... Types>
-struct merge_tuples{
-  typedef std::tuple<Types...> type;
-};
-*/
-template<typename... Types>
-struct merge_tuples;
+struct Tuple_merge;
 
 // If more than 2 tuples
 template<typename...Types1,typename...Types2,typename...Tuples>
-struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>, Tuples...>
+struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>, Tuples...>
 {
-  typedef typename merge_tuples<std::tuple<Types1...,Types2...>, Tuples...>::type type;
+  typedef typename Tuple_merge<std::tuple<Types1...,Types2...>, Tuples...>::type type;
 };
 
 // If 2 tuples
 template<typename...Types1,typename...Types2>
-struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>>
+struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
 {
   typedef std::tuple<Types1..., Types2...> type;
 };
@@ -157,11 +151,11 @@ struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>>
      */
     template<typename Tuple, typename Type>
     struct Tuple_addBack {
-        typedef typename merge_tuples<Tuple,std::tuple<Type> >::type type;
+        typedef typename Tuple_merge<Tuple,std::tuple<Type> >::type type;
     };
 
     /*!
-     *
+     *  \brief  Tuple_add<Tuple, int Index, Type>::type is a tuple with Type at Index and the types in Tuple beginning at Index and counting have their indices incremented by 1.
      */
     template<typename Tuple, typename S>
     struct Tuple_add__;
@@ -178,7 +172,7 @@ struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>>
         typedef typename Tuple_add__<Tuple, postSequence>::type preTuple;
         typedef typename Tuple_add__<Tuple, postSequence>::type postTuple;
 
-        typedef typename merge_tuples<preTuple, std::tuple<Type>, postTuple>::type type;
+        typedef typename Tuple_merge<preTuple, std::tuple<Type>, postTuple>::type type;
     };
 
     // Base
@@ -194,7 +188,7 @@ struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>>
     // Add at the beginning
     template<typename... types, typename Type>
     struct Tuple_add<std::tuple<types...>, 0, Type> {
-        typedef typename merge_tuples<std::tuple<Type>, std::tuple<types...>>::type type;
+        typedef typename Tuple_merge<std::tuple<Type>, std::tuple<types...>>::type type;
     };
 
 
@@ -230,7 +224,7 @@ struct merge_tuples<std::tuple<Types1...>,std::tuple<Types2...>>
      */
     template<typename Tuple, typename Type>
     struct Tuple_containType {
-        typedef int value;
+        static const bool value;
     };
 
     /*!

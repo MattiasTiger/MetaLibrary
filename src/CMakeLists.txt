@@ -26,5 +26,7 @@ ADD_EXECUTABLE(MetaLibrary test.cpp MetaLibrary.hpp
 	Meta/Condition.hpp
 	Meta/FlowControl.hpp
 	Meta/TupleUtilities.hpp
-        Meta/Sequence.hpp)
+        Meta/Sequence.hpp
+		Meta/Type.hpp
+		Meta/Utilities.hpp)
 

@@ -1,3 +1,6 @@
+/*
+ * Author: Mattias Tiger 2013
+ */
 #ifndef SEQUENCE_HPP
 #define SEQUENCE_HPP
 
@@ -42,6 +45,9 @@
  *          //Example usage
  *          AnExample<Range<0,5>::type, Range<6,10>::type>
  *
+ *
+ *
+ *  More efficient, but less clear, algorithm to generate indices: http://stackoverflow.com/questions/18942322/effective-way-to-select-last-parameter-of-variadic-template
  */
 
 namespace meta
