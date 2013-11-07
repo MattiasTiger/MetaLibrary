@@ -53,6 +53,7 @@ namespace meta
 ////////
 ///
 
+
 /*!
  *  \brief  PrintTupleTypes<Tuple>::stream is an ostream containing the names of the types in Tuple and can for example be sent to cout.
  */
@@ -70,7 +71,7 @@ struct PrintTupleTypes_<First> {
          os << TypeName<First>::value;
          return os;
      }
- };
+};
 // If the tuple contain a tuple and then other types/tuples
 template<typename TypeFirst1, typename... TypeFirst, typename Rest1, typename... Rest>
 struct PrintTupleTypes_<std::tuple<TypeFirst1, TypeFirst...>, Rest1, Rest...> {
@@ -114,6 +115,11 @@ struct PrintTupleTypes<std::tuple<>> {
 
 ////////
 
+
+
+
+
+
 /*!
  *  \brief  Merges two or several tuples, the new merged tuple is found in Tuple_merge<Tuples...>::type
  */
@@ -138,11 +144,39 @@ struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
 ////////
 
     /*!
+     *  \brief Tuple_length<Tuple>::value is the length of the tuple, the size in the number of types.
+     */
+    template<typename Tuple>
+    struct Tuple_length {
+        static const int value = std::tuple_size<Tuple>::value;
+    };
+
+    /*!
      *
      */
     template<typename Tuple, int Index>
     struct Tuple_getType {
         typedef typename std::tuple_element<Index, Tuple>::type type;
+    };
+
+    /*!
+     *
+     */
+
+    template<typename Tuple, typename Type, int Index>
+    struct Tuple_findType_ {
+        static const int value = IF<Condition<std::is_same<typename Tuple_getType<Tuple, Index>::type, Type>::value>,
+                                      Int<Index>,
+                                     IF<Condition<Index+1 == Tuple_length<Tuple>::value>,
+                                          Int<-1>,
+                                         Tuple_findType_<Tuple, Type, Index+1>
+                                       >
+                                    >::value;
+    };
+
+    template<typename Tuple, typename Type>
+    struct Tuple_findType {
+        static const int value = Tuple_findType_<Tuple, Type, 0>::value;
     };
 
 
@@ -178,12 +212,15 @@ struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
     // Base
     template<typename Tuple, int Index, typename Type>
     struct Tuple_add;
-    // Add at the end
+    // Add at the end or in between two types.
     template<typename... types, int Index, typename Type>
     struct Tuple_add<std::tuple<types...>, Index, Type> {
         static_assert(Index <= int(sizeof...(types)), "Tuple_add<Tuple, index, Type> got a index that was out of bounds (to large)");
         static_assert(Index >= 0,                     "Tuple_add<Tuple, index, Type> got a index that was out of bounds (negative)");
-        typedef typename IF<Condition<Index == sizeof...(types)>, Tuple_addBack<std::tuple<types...>, Type>, Tuple_add_<std::tuple<types...>, Index, Type>>::type type;
+        typedef typename IF<Condition<Index == sizeof...(types)>,
+                             Tuple_addBack<std::tuple<types...>, Type>,
+                            Tuple_add_<std::tuple<types...>, Index, Type>
+                           >::type type;
     };
     // Add at the beginning
     template<typename... types, typename Type>
@@ -237,16 +274,6 @@ struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
 
 
     /*!
-     *
-     */
-    template<typename Tuple>
-    struct Tuple_length {
-        static const unsigned int value = std::tuple_size<Tuple>::value;
-    };
-
-
-
-    /*!
      * \brief   Tuple contains the entire Tuple_... interface (for easy access)
      */
     template<typename... Variadic>
@@ -274,7 +301,6 @@ struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
         // Set operations
 
     };
-
 }
 
 #endif

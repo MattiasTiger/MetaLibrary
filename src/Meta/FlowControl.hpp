@@ -25,26 +25,12 @@ namespace meta
         typedef T type;
     };
 
-
-    // IMPROVE THIS! (using indices? using loops?: Using tuple<types...> specialization)
-    /*!
-     * \brief       MetaFunction takes another template and arguments as a tuple that are applied on the template.
-     *
-     *  \details    MetaFunction<Template, std::tuple<Parameters...> >::type  :=  Template<Parameters...>
-     */
-    template<int N, int N_MAX, template<typename... A> class Template, typename ArgTuple, int... Indices>
-    struct MetaCall_ : public MetaCall_<N+1, N_MAX, Template, ArgTuple, Indices..., N>{
-        // typedef typename MetaCall_<N+1, N_MAX, Template, ArgTuple, Indices..., N>::type type;
-    };
-    template<int N_MAX, template<typename... A> class Template, typename ArgTuple, int... Indices>
-    struct MetaCall_<N_MAX, N_MAX, Template, ArgTuple, Indices...> : public Template<typename std::tuple_element<Indices, ArgTuple>::type...> {
-        // typedef Template<typename std::tuple_element<Indices, ArgTuple>::type...> type;
+    template <int N>
+    struct Int {
+        static const int value = N;
     };
 
-    template<template<typename... A> class Template, typename ArgTuple>
-    struct MetaCall : public MetaCall_<0, std::tuple_size<ArgTuple>::value, Template, ArgTuple> {
-        //typedef typename MetaCall_<0, std::tuple_size<ArgTuple>::value, Template, ArgTuple>::type type;
-    };
+
 
 
     /*!
@@ -61,6 +47,7 @@ namespace meta
     template<typename Condition, typename Then, typename Else>
     struct IF_ {};
 
+/*
     template<typename Then, typename Else>
     struct IF_<True, Then, Else> {
         typedef typename Then::type type;
@@ -73,6 +60,16 @@ namespace meta
 
     template<typename Condition, typename Then, typename Else = Type<NOP> >
     struct IF : public IF_<typename Condition::type, Then, Else> {};
+    */
+
+    template<typename Then, typename Else>
+    struct IF_<True, Then, Else> : public Then {};
+
+    template<typename Then, typename Else>
+    struct IF_<False, Then, Else> : public Else {};
+
+    template<typename Condition, typename Then, typename Else = Type<NOP> >
+    struct IF : public IF_<typename Condition::type, Then, Else> {};
 
 
     /*!
@@ -81,8 +78,20 @@ namespace meta
 
 
     /*!
-     * \brief   FOR_EACH<Tuple, >
+     * \brief   FOR_EACH<Tuple, Template, ParameterTuple, ArgumentTypeTuple>::execute(Arguments)
      */
+/*
+    template<typename First, typename...Rest, template<typename... T> class Template, typename... Parameters, typename... ArgumentTypes>
+    struct FOR_EACH_;
+
+    template<typename First, typename...Rest, template<typename... T> class Template, typename... Parameters, typename... ArgumentTypes>
+    struct FOR_EACH_<std::tuple<First, Rest...>,Template,std::tuple<Parameters...>,std::tuple<ArgumentTypes...>> {
+
+    };
+
+    template<typename Tuple, template<typename... T> class Template, typename ParameterTuple, typename ArgumentTypeTuple>
+    struct FOR_EACH : public FOR_EACH_<Tuple, Template, ParameterTuple, ArgumentTypeTuple> {};
+*/
 }
 
 

@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/test.cpp" "C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src-build/CMakeFiles/MetaLibrary.dir/test.cpp.obj"
+  "C:/Users/Student/Documents/GitHub/MetaLibrary/src/test.cpp" "C:/Users/Student/Documents/GitHub/MetaLibrary/src-build/CMakeFiles/MetaLibrary.dir/test.cpp.obj"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,7 +15,7 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
   "."
-  "C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src"
+  "C:/Users/Student/Documents/GitHub/MetaLibrary/src"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
 SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

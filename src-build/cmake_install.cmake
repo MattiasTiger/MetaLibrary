@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src
+# Install script for directory: C:/Users/Student/Documents/GitHub/MetaLibrary/src
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/MetaLibrary")
+  SET(CMAKE_INSTALL_PREFIX "C:/Program Files/MetaLibrary")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,7 +33,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src-build/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "C:/Users/Student/Documents/GitHub/MetaLibrary/src-build/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src-build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "C:/Users/Student/Documents/GitHub/MetaLibrary/src-build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

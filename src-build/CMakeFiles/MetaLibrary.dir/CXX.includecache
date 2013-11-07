@@ -6,53 +6,57 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
 FlowControl.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 tuple
 -
 
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
 FlowControl.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
 ostream
 -
 tuple
 -
 Sequence.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
 FlowControl.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 Type.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
 
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
 
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Utilities.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Utilities.hpp
+tuple
+-
+FlowControl.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
 Meta/Sequence.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Sequence.hpp
 Meta/FlowControl.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/FlowControl.hpp
 Meta/Condition.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Condition.hpp
 Meta/TupleUtilities.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/TupleUtilities.hpp
 Meta/Type.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Type.hpp
 Meta/Utilities.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/Meta/Utilities.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/Meta/Utilities.hpp
 
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/test.cpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/test.cpp
 iostream
 -
 string
 -
 MetaLibrary.hpp
-C:/Users/TiXiR/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
+C:/Users/Student/Documents/GitHub/MetaLibrary/src/MetaLibrary.hpp
 
