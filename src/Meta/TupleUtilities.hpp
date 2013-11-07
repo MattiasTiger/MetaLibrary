@@ -160,23 +160,17 @@ struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
     };
 
     /*!
-     *
+     *  \brief  Tuple_findType<Tuple,Type>::value is the index of the first occurance of Type (or -1 if Tuple does not contain any such type)
      */
-
-    template<typename Tuple, typename Type, int Index>
-    struct Tuple_findType_ {
+    template<typename Tuple, typename Type, int Index = 0>
+    struct Tuple_findType {
         static const int value = IF<Condition<std::is_same<typename Tuple_getType<Tuple, Index>::type, Type>::value>,
-                                      Int<Index>,
-                                     IF<Condition<Index+1 == Tuple_length<Tuple>::value>,
-                                          Int<-1>,
-                                         Tuple_findType_<Tuple, Type, Index+1>
+                                      Int<Index>,                               // Found
+                                     IF<Condition<Index+1 >= Tuple_length<Tuple>::value>,
+                                          Int<-1>,                              // Not found, end of Tuple
+                                         Tuple_findType<Tuple, Type, Index+1>   // Recursion: try next index
                                        >
                                     >::value;
-    };
-
-    template<typename Tuple, typename Type>
-    struct Tuple_findType {
-        static const int value = Tuple_findType_<Tuple, Type, 0>::value;
     };
 
 
@@ -261,7 +255,7 @@ struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
      */
     template<typename Tuple, typename Type>
     struct Tuple_containType {
-        static const bool value;
+        static const bool value = Tuple_findType<Tuple, Type>::value != -1;
     };
 
     /*!
