@@ -81,5 +81,10 @@ int main()
     std::cout << "sizeAfter: "+std::to_string(meta::Tuple_length<newTuple2::type>::value) << "\n";
     std::cout << meta::PrintTupleTypes<newTuple2::type>::stream << "\n";
 
+    std::cout << "\n";
+    std::cout << meta::Tuple_findType<tuple1::type, int>::value << "\n";
+    std::cout << meta::Tuple_findType<tuple1::type, double>::value << "\n";
+    std::cout << meta::Tuple_findType<tuple1::type, float>::value << "\n";
+
     return 0;
 }
