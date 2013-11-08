@@ -251,7 +251,7 @@ struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
 
 
     /*!
-     *
+     *  \brief  Tuple_containType::value is a bool.
      */
     template<typename Tuple, typename Type>
     struct Tuple_containType {
@@ -259,7 +259,7 @@ struct Tuple_merge<std::tuple<Types1...>,std::tuple<Types2...>>
     };
 
     /*!
-     *
+     *  \brief Tuple_isEmpty::value is a bool
      */
     template<typename Tuple>
     struct Tuple_isEmpty {

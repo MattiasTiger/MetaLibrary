@@ -80,18 +80,25 @@ namespace meta
     /*!
      * \brief   FOR_EACH<Tuple, Template, ParameterTuple, ArgumentTypeTuple>::execute(Arguments)
      */
-/*
-    template<typename First, typename...Rest, template<typename... T> class Template, typename... Parameters, typename... ArgumentTypes>
+
+    template<typename Tuple, template<typename... T> class Template, typename ParameterTuple, typename ArgumentTypeTuple>
     struct FOR_EACH_;
 
     template<typename First, typename...Rest, template<typename... T> class Template, typename... Parameters, typename... ArgumentTypes>
     struct FOR_EACH_<std::tuple<First, Rest...>,Template,std::tuple<Parameters...>,std::tuple<ArgumentTypes...>> {
-
+        static void execute(ArgumentTypes... Args) {
+            Template<First, Parameters...>::execute(Args...);
+            FOR_EACH_<std::tuple<Rest...>, Template, std::tuple<Parameters...>, std::tuple<ArgumentTypes...>>::execute(Args...);
+        }
+    };
+    template<template<typename... T> class Template, typename... Parameters, typename... ArgumentTypes>
+    struct FOR_EACH_<std::tuple<>,Template,std::tuple<Parameters...>,std::tuple<ArgumentTypes...>> {
+        static void execute(ArgumentTypes... Args) {}
     };
 
     template<typename Tuple, template<typename... T> class Template, typename ParameterTuple, typename ArgumentTypeTuple>
     struct FOR_EACH : public FOR_EACH_<Tuple, Template, ParameterTuple, ArgumentTypeTuple> {};
-*/
+
 }
 
 

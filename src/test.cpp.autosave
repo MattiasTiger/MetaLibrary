@@ -42,7 +42,7 @@ void printIndexRange(meta::Sequence<sequence...>) {
     printIndexRange_<sequence...>();
 }
 
-
+// Prints the string if Types does not contain any 
 template<typename Element, typename... Types>
 struct CompareTypes {
     static void execute(std::string & str) {
